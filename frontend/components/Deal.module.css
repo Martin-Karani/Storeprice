@@ -1,0 +1,56 @@
+.deals {
+}
+.deal-item {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5em;
+  margin: 0 0.5em;
+  position: relative;
+  padding: 0.5em;
+}
+.deal-item img {
+  width: 35%;
+}
+.deal-details {
+  width: 65%;
+}
+.deal-details > * {
+  margin-bottom: 0.5em;
+}
+.deal-tag {
+  position: absolute;
+  top: 0.5rem;
+  left: 0.5rem;
+  background-color: palevioletred;
+  color: #fff;
+  font-size: 0.7rem;
+  padding: 0.4em;
+  border-radius: 5px;
+}
+.deal-favorite {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  padding: 0.5rem;
+  border-radius: 50%;
+  box-shadow: rgb(0 0 0 / 10%) 0px 10px 50px;
+}
+.deal-brand {
+  font-weight: 600;
+  color: rgba(0, 0, 0, 0.705);
+  font-size: 0.75rem;
+}
+.deal-odd-price {
+  text-decoration: line-through;
+  font-weight: 300;
+  color: rgba(50, 52, 53, 0.616);
+}
+.deal-name {
+  font-size: 0.85rem;
+}
+.deal-price {
+  font-weight: 500;
+}
+.deal-specs {
+  color: rgba(0, 0, 0, 0.623);
+}

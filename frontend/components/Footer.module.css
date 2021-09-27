@@ -1,0 +1,13 @@
+.footer {
+  padding: 0 0.9em;
+  /* position: fixed;
+  right: 0;
+  bottom: 1.9rem;
+  left: 0; */
+  background-color: rgb(65, 68, 66);
+  color: #fff;
+}
+.about-us {
+  background-color: transparent;
+  color: #fff;
+}

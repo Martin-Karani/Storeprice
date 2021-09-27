@@ -1,0 +1,101 @@
+.product-container {
+  padding: 0 0.9em;
+}
+.product-container__card {
+  min-height: 15rem;
+  min-width: 10rem;
+  margin: 0 0.2em;
+}
+.product-container__category {
+  margin: 1em 0;
+}
+
+.product-container__cards {
+  display: flex;
+  overflow-x: auto;
+}
+.product-container__card .img-wrapper {
+  min-width: 9rem;
+  /* height: 9.5rem; */
+  /* background-color: var(--darker-white); */
+  padding: 0.6em;
+  border-radius: 5px;
+}
+.product-container__card .img-wrapper::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  /* border-radius: 5px 5px 0 0; */
+  border-radius: 9px 9px 0 0;
+  background-color: rgb(0 0 0 / 19%);
+  opacity: 0.3;
+}
+.product-container__card .img-wrapper img {
+  min-width: 100%;
+}
+@media screen and (min-width: 900px) {
+  .product-container__card .img-wrapper {
+    width: 14rem;
+  }
+  .product-container {
+    position: relative;
+    overflow: auto;
+  }
+  .dt-deals .img-wrapper {
+    width: 7rem;
+  }
+  .dt-deals {
+    /* position: absolute; */
+    /* margin-left: 1rem; */
+    display: flex;
+    flex-direction: column;
+  }
+  .dt-deals > * div {
+    flex-basis: 100%;
+  }
+  .deals-wrapper {
+    position: relative;
+    background-color: var(--gray-002);
+    padding: 0 1rem;
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+  }
+  .today-deals {
+    font-size: 0.9rem;
+    background-color: black;
+    margin-top: 1rem;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    color: #fff;
+    padding: 0.5rem 0rem;
+    text-align: center;
+  }
+  .home-main-section {
+    display: grid;
+    grid-template-columns: 1.7fr 5fr;
+    column-gap: 2rem;
+  }
+  .dt-deal-item {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    margin-bottom: 0.5em;
+    gap: 0.5rem;
+    padding: 0.5em 0;
+    border-bottom: 1px dotted gray;
+  }
+  .dt-deals-details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+    justify-content: center;
+  }
+}
+@media screen and (min-width: 1200px) {
+  .home-main-section {
+    grid-template-columns: 1.3fr 5fr;
+  }
+}

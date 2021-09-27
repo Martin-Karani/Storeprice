@@ -1,0 +1,132 @@
+.login,
+.sign-store,
+.sign-member {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* justify-content: center; */
+}
+.login .back,
+.sign-member .back {
+  position: absolute;
+  top: 2rem;
+  left: 2rem;
+}
+.login-success {
+  position: absolute;
+  top: 6rem;
+  left: 50%;
+  right: 50%;
+  transform: translate(-50%, -50%);
+  width: 80vw;
+  background-color: #000;
+  border-radius: 5px;
+  color: #fff;
+  /* font-size: ; */
+  font-weight: 600;
+  padding: 1rem;
+}
+.login .back svg {
+  margin-right: 1em;
+  stroke: #000;
+  stroke-width: 0.6rem;
+}
+.sign-store {
+  height: auto;
+}
+.login__welcome {
+  height: 60vh;
+  display: flex;
+  /* justify-content: center; */
+  align-items: center;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+.login__email,
+.signup__number,
+.login__password {
+  width: 100%;
+  border: none;
+  outline: none;
+  padding: 0.3em 0;
+  font-size: 1rem;
+}
+/* .login__input .error,
+.login__input .error {
+  color: rgb(245, 84, 84);
+  font-size: 0.7rem;
+} */
+label {
+  display: inline;
+}
+.input-error {
+  display: inline;
+  color: rgb(245, 84, 84);
+  font-size: 0.7rem;
+  width: initial;
+  margin-bottom: 0.5em;
+  padding: 0.5em;
+  /* border: 1px solid rgb(245, 84, 84); */
+  border-radius: 5px;
+}
+.login__input label {
+  margin-right: 1rem;
+}
+.forget-password {
+  color: #0000ff;
+}
+
+.login__input {
+  width: 80%;
+  margin-bottom: 0.5em;
+  padding: 0.5em;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+.login__input select,
+.login__input textarea {
+  border: none;
+}
+.login__input select {
+  background-color: transparent;
+  width: 100%;
+}
+.invalid-password {
+  width: 80%;
+  border: 1px solid;
+  padding: 0.5em;
+  margin-bottom: 0.5em;
+  color: rgb(245, 84, 84);
+  border-radius: 5px;
+}
+
+.login__input.error,
+.invalid-password {
+  border-color: rgba(214, 0, 0, 0.315);
+}
+.login__signUp-btn,
+.login__btn {
+  padding: 0.7em 3em;
+  border-radius: 5px;
+  font-size: 1rem;
+  margin: 1em;
+}
+.login__btn {
+  background-color: #000;
+  color: #fff;
+}
+.login__signUp-btn {
+  background: none;
+  border: 1px solid #ccc;
+}
+.login__or {
+  margin: 0.5em;
+}
+
+@media screen and (min-width: 900px) {
+  .login {
+    width: 40%;
+  }
+}

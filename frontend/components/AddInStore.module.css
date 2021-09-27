@@ -1,0 +1,22 @@
+.products-images img {
+  height: 8rem;
+  width: 7.5rem;
+}
+.primary-btn {
+  margin-right: auto;
+  background-color: #000;
+  border: none;
+  color: #fff;
+  padding: 0.5em;
+  border-radius: 10%;
+}
+.secordary-btn {
+  margin-left: auto;
+  background-color: transparent;
+  border-radius: 10%;
+  border: 1px solid #000;
+  padding: 0.5rem;
+}
+.add-price {
+  display: block;
+}

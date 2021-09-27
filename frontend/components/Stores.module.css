@@ -1,0 +1,14 @@
+.stores-page {
+  margin: 0 0.7em;
+}
+.store-card img {
+  height: 5rem;
+  width: 5rem;
+  border-radius: 6px;
+  background-color: var(--gray-001);
+}
+.store-category ul {
+  flex-wrap: wrap;
+  gap: 1rem;
+  /* justify-content: space-between; */
+}
