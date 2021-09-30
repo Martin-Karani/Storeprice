@@ -21,7 +21,7 @@ import { ReactComponent as Instagram } from "../public/instagram.svg";
 import { ReactComponent as Twitter } from "../public/twitter.svg";
 import { ReactComponent as Share } from "../public/share.svg";
 import { ReactComponent as Map } from "../public/map.svg";
-import styles from "./WebStore.module.css";
+import styles from "../styles/WebStore.module.css";
 
 function WebStore() {
   ScrollToTop();

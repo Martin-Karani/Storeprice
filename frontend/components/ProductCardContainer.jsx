@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Image from "next/image";
 
-import styles from "./ProductCardContainer.module.css";
+import styles from "../styles/ProductCardContainer.module.css";
 import ProductCard from "./ProductCard";
 import Space from "./common/Space";
 import Samsung from "../public/samsung.jpeg";

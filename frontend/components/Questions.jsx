@@ -1,8 +1,8 @@
 import { useMutation } from "@apollo/client";
 import React, { useContext, useState } from "react";
-import { useRouter } from 'next/router'
+import { useRouter } from "next/router";
 import { AuthContext } from "./context/auth";
-import { ASK_QUESTION } from "../graphql/Mutations";
+import { ASK_QUESTION } from "./graphql/Mutations";
 import useForm from "./hooks/useForm";
 
 function Questions({ questions, productId, productName, getProductRefetch }) {

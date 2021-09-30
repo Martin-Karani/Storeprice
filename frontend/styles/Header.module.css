@@ -8,9 +8,10 @@
   border-radius: 0 0 15px 15px;
   /* height: 140px; */
 }
-.dt-header {
+.dt-head {
   display: none;
 }
+
 .search-wrapper {
   position: relative;
   font-size: 1rem;
@@ -30,10 +31,11 @@
   background: var(--gray-002);
   border: none;
   outline: none;
+
   white-space: nowrap;
 }
 
-.header__search:focus {
+#header__search:focus {
   color: #000;
   outline-offset: none;
 }
@@ -118,6 +120,11 @@
 }
 .logo {
   margin-bottom: 0.5em;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5em;
+  margin-top: 0.5em;
+  align-items: center;
 }
 .logo h3 {
   font-size: 1.2rem;
@@ -151,8 +158,21 @@
   flex: 1;
 }
 @media screen and (min-width: 900px) {
+  .sm-header {
+    display: none;
+  }
+  .dt-head {
+    display: block;
+  }
   .dropdown-categories {
-    /* display: ; */
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    left: 0;
+    z-index: 4;
+    background-color: #fff;
+    padding: 0.5em;
   }
   .dt-header {
     /* position: absolute; */
@@ -167,19 +187,24 @@
   /* ol {
     margin: 0;
   } */
+  .dt-explore {
+    display: flex;
+    flex-direction: row;
+  }
   .dt-explore .img-wrapper,
-  .dt-explore a {
+  .dt-explore div {
     border-radius: 6px;
     display: flex;
     align-items: center;
   }
-  .dt-explore a {
+  .dt-explore div {
+    cursor: pointer;
     background-color: #f2f2f25e;
     margin-right: 1rem;
     padding: 0.5em 1em 0.5em 0.5em;
     position: relative;
   }
-  .dt-explore a:hover {
+  .dt-explore div:hover {
     background-color: #f2f2f2;
     box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
       rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;

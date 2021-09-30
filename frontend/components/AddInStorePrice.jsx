@@ -2,7 +2,7 @@ import Image from "next/image";
 import React from "react";
 
 import NavBar from "./NavBar";
-import styles from "./AddInStore.module.css";
+import styles from "../styles/AddInStore.module.css";
 
 function AddInStorePrice() {
   return (

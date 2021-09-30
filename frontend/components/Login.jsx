@@ -1,11 +1,12 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
-import { Link, useHistory } from "react-router-dom";
+import Link from "next/link";
+import { useRouter } from "next/router";
 import { gql, useMutation } from "@apollo/client";
-import useForm from "../useForm";
+import useForm from "./hooks/useForm";
 
-import styles from "./Login.module.css";
-import { AuthContext } from "../context/auth";
-import { LOGIN } from "../graphql/Mutations";
+import styles from "../styles/Login.module.css";
+import { AuthContext } from "./context/auth";
+import { LOGIN } from "./graphql/Mutations";
 import SignUp from "./SignUp";
 import { BackFunction } from "./NavBar";
 

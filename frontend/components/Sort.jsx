@@ -1,6 +1,8 @@
 import React from "react";
 import useForm from "./hooks/useForm";
 
+import styles from "../styles/Filter.module.css";
+
 function Sort({ setIsSortVisible }) {
   const { input, handleChange, handleSubmit } = useForm(sortCallback, {
     sort: "Relevance",
@@ -9,7 +11,7 @@ function Sort({ setIsSortVisible }) {
   function sortCallback() {}
   return (
     <>
-      <ul className="sort">
+      <ul className={styles["sort"]}>
         <button className="close" onClick={() => setIsSortVisible(false)}>
           &times;
         </button>

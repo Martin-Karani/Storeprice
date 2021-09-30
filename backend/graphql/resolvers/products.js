@@ -30,12 +30,12 @@ const findMember = async (memberId) => {
 
 module.exports = {
   Query: {
-    getProducts: async () => {
+    getProducts: async (_, { category }) => {
       try {
         const products = await server
           .getDb()
           .db()
-          .collection("products")
+          .collection(category)
           .find()
           .toArray();
 
@@ -72,13 +72,13 @@ module.exports = {
         throw error;
       }
     },
-    getProduct: async (_, { productId }) => {
+    getProduct: async (_, { category, productName }) => {
       try {
         const product = await server
           .getDb()
           .db()
-          .collection("products")
-          .findOne({ _id: mongodb.ObjectId(productId) });
+          .collection(category)
+          .findOne({ name: productName });
 
         return {
           ...product,
@@ -104,15 +104,15 @@ module.exports = {
   Mutation: {
     createProduct: async (_, { productInput }, context) => {
       try {
-        const store = isAuth(context);
+        // const store = isAuth(context);
 
-        if (!store.isStore) {
-          throw new UserInputError("Store not authorized to create a product");
-        }
+        // if (!store.isStore) {
+        //   throw new UserInputError("Store not authorized to create a product");
+        // }
         const exists = await server
           .getDb()
           .db()
-          .collection("products")
+          .collection(productInput.category)
           .findOne({ name: productInput.name });
 
         if (exists) {
@@ -123,11 +123,11 @@ module.exports = {
         product.inStorePrices = [];
         product.questions = [];
         product.priceHistory = [];
-
+        console.log("creating");
         const { ops } = await server
           .getDb()
           .db()
-          .collection("products")
+          .collection(productInput.category)
           .insertOne(product);
 
         if (ops) return "product added successfully";
@@ -147,7 +147,7 @@ module.exports = {
         const product = await server
           .getDb()
           .db()
-          .collection("products")
+          .collection(fields.category)
           .findOne({ _id: mongodb.ObjectId(productId) });
 
         const newProduct = {
@@ -158,7 +158,7 @@ module.exports = {
         const updatedProduct = await server
           .getDb()
           .db()
-          .collection("products")
+          .collection(fields.category)
           .replaceOne({ _id: mongodb.ObjectID(productId) }, newProduct);
 
         if (updatedProduct.modifiedCount > 0) {
@@ -172,12 +172,12 @@ module.exports = {
         throw err;
       }
     },
-    deleteProduct: async (_, { productId }) => {
+    deleteProduct: async (_, { productId, category }) => {
       try {
         const product = await server
           .getDb()
           .db()
-          .collection("products")
+          .collection(category)
           .deleteOne({ _id: mongodb.ObjectId(productId) });
 
         if (product.deletedCount < 1) {
@@ -201,7 +201,7 @@ module.exports = {
         const updatedProduct = await server
           .getDb()
           .db()
-          .collection("products")
+          .collection(onlinePriceInput.category)
           .updateOne(
             { _id: mongodb.ObjectId(onlinePriceInput.productId) },
             {
@@ -220,7 +220,7 @@ module.exports = {
           const product = await server
             .getDb()
             .db()
-            .collection("products")
+            .collection(onlinePriceInput.category)
             .findOne({ _id: mongodb.ObjectId(onlinePriceInput.productId) });
 
           if (
@@ -230,7 +230,7 @@ module.exports = {
             await server
               .getDb()
               .db()
-              .collection("products")
+              .collection(onlinePriceInput.category)
               .updateOne(
                 { _id: mongodb.ObjectId(onlinePriceInput.productId) },
                 { $set: { lowestPrice: onlinePriceInput.price } }
@@ -243,7 +243,7 @@ module.exports = {
             await server
               .getDb()
               .db()
-              .collection("products")
+              .collection(onlinePriceInput.category)
               .updateOne(
                 { _id: mongodb.ObjectId(onlinePriceInput.productId) },
                 { $set: { highestPrice: onlinePriceInput.price } }
@@ -300,7 +300,11 @@ module.exports = {
         throw err;
       }
     },
-    deleteOnlinePrice: async (_, { productId, onlinePriceId }, context) => {
+    deleteOnlinePrice: async (
+      _,
+      { productId, onlinePriceId, category },
+      context
+    ) => {
       try {
         const { isStore } = isAuth(context);
         if (!isStore) {
@@ -309,7 +313,7 @@ module.exports = {
         const updatedProduct = await server
           .getDb()
           .db()
-          .collection("products")
+          .collection(category)
           .updateOne(
             { _id: mongodb.ObjectId(productId) },
             { $pull: { onlinePrices: { _id: onlinePriceId } } }
@@ -355,7 +359,7 @@ module.exports = {
           const product = await server
             .getDb()
             .db()
-            .collection("products")
+            .collection(category)
             .updateOne(
               { _id: mongodb.ObjectId(productId) },
               { $push: { inStorePrices: priceCard } }
@@ -399,7 +403,7 @@ module.exports = {
         throw err;
       }
     },
-    updateInStorePrice: async (_, { productId, price }, context) => {
+    updateInStorePrice: async (_, { productId, price, category }, context) => {
       try {
         const store = isAuth(context);
         if (!store) {
@@ -409,7 +413,7 @@ module.exports = {
         const product = await server
           .getDb()
           .db()
-          .collection("products")
+          .collection(category)
           .findOne({
             _id: mongodb.ObjectId(productId),
           });
@@ -425,7 +429,7 @@ module.exports = {
         const productUpdated = await server
           .getDb()
           .db()
-          .collection("products")
+          .collection(category)
           .updateOne(
             {
               _id: mongodb.ObjectId(productId),
@@ -455,7 +459,7 @@ module.exports = {
       }
     },
 
-    deleteInStorePrice: async (_, { productId }, context) => {
+    deleteInStorePrice: async (_, { productId, category }, context) => {
       try {
         const store = isAuth(context);
         if (!store.isStore) {
@@ -465,7 +469,7 @@ module.exports = {
         const product = await server
           .getDb()
           .db()
-          .collection("products")
+          .collection(category)
           .findOne({
             _id: mongodb.ObjectId(productId),
           });
@@ -476,7 +480,7 @@ module.exports = {
         const productUpdated = await server
           .getDb()
           .db()
-          .collection("products")
+          .collection(category)
           .updateOne(
             {
               _id: mongodb.ObjectId(productId),

@@ -27,7 +27,7 @@
 }
 .search__content {
   position: relative;
-  padding: 1rem 0 0.7em;
+  padding: 1rem 0.7em 0.7em 0;
   box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
 
   width: 100%;
@@ -36,19 +36,17 @@
   background-color: #fff;
   margin-bottom: 0.7em;
 }
-.search__content .svg-wrapper svg {
-  position: absolute;
-  right: 1.5rem;
-  top: -0.7em;
-  height: 14px;
-  width: 14px;
-  background-color: transparent;
+.search__content .svg-wrapper {
+  background-color: var(--gray-003);
+  margin-left: 0.4em;
+  border-radius: 5px;
 }
 .search__content .x {
-  margin: 0 1em;
+  margin: 0 0.4em 0 0.7em;
   font-size: 1.4rem;
   padding: 0.1em 0.4em;
   color: #000;
+  background: var(--gray-003);
   border-radius: 5px;
 }
 .search__suggestions {

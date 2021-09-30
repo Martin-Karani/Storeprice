@@ -22,6 +22,7 @@ module.exports = gql`
     _id: String!
     onlineSite: String!
     storeName: String!
+    category: String!
     productId: ID!
     logo: String!
     price: Float!
@@ -35,6 +36,7 @@ module.exports = gql`
     onlineSite: String!
     storeName: String!
     productId: ID!
+    category: String!
     logo: String!
     price: Float!
     url: String!
@@ -45,6 +47,7 @@ module.exports = gql`
     _id: String!
     store: Store
     productId: ID!
+    category: String!
     storeId: ID!
     price: Float!
     rating: Int
@@ -184,8 +187,8 @@ module.exports = gql`
   type Query {
     search(searchInput: String!): [Product]!
     getUser: Member!
-    getProducts: [Product!]
-    getProduct(productId: ID!): Product!
+    getProducts(category: String!): [Product!]
+    getProduct(category: String!, productName: String!): Product!
     getStores: [Store!]
     getSelectedProducts(productIds: [ID!]!): [Product!]
 
@@ -196,7 +199,7 @@ module.exports = gql`
   type Mutation {
     # product mutation
     createProduct(productInput: ProductInput!): String!
-    deleteProduct(productId: ID!): String!
+    deleteProduct(productId: ID!, category: String!): String!
     updateProduct(productId: ID, fields: ProductInput): String!
     likeProduct(productId: ID!): String
 
@@ -213,12 +216,16 @@ module.exports = gql`
     # onlinePrice mutation
     addOnlinePrice(onlinePriceInput: OnlinePriceInput): String!
     updateOnlinePrice(updateOnlinePriceInput: UpdateOnlinePriceInput): String!
-    deleteOnlinePrice(productId: ID!, onlinePriceId: ID!): String!
+    deleteOnlinePrice(
+      productId: ID!
+      category: String!
+      onlinePriceId: ID!
+    ): String!
 
     # inStorePrice mutation
     addInStorePrice(productId: ID!, price: Float!, category: String!): String!
-    updateInStorePrice(productId: ID!, price: Float): String!
-    deleteInStorePrice(productId: ID!): String!
+    updateInStorePrice(productId: ID!, price: Float, category: String!): String!
+    deleteInStorePrice(productId: ID!, category: String!): String!
 
     # Member mutation
     login(email: String!, password: String!): Member!

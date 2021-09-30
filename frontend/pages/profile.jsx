@@ -1,13 +1,14 @@
 import { useContext, useState } from "react";
 import Image from "next/image";
-
-import NavBar from "./NavBar";
-import Products from "./Products";
-
-import styles from "Profile.module.css";
 import Link from "next/link";
-import SignUp from "./SignUp";
-import { AuthContext } from "./context/auth";
+import { AuthContext } from "../components/context/auth";
+
+import NavBar from "../components/NavBar";
+import Products from "../components/Products";
+import SignUp from "../components/SignUp";
+
+import styles from "../styles/Profile.module.css";
+import classes from "../styles/Login.module.css";
 
 function Profile() {
   const [currectlyVisible, setCurrectlyVisible] = useState("recently");
@@ -33,20 +34,20 @@ function Profile() {
             </div>
           ) : (
             <div className="flex-row align-center">
-              <Link to="/login" className="login__btn">
-                Login
+              <Link href="/login">
+                <div className={classes["login__btn"]}>Login</div>
               </Link>
               <p>or</p>
               <button
                 onClick={() => setSignUp(true)}
-                className="login__signUp-btn"
+                className={classes["login__signUp-btn"]}
               >
                 Sign Up
               </button>
             </div>
           )}
         </div>
-        <ul className={"flex-row" + styles["profile-nav"]}>
+        <ul className={"flex-row " + styles["profile-nav"]}>
           <li onClick={() => setCurrectlyVisible("recently")}>
             Recently Viewed
           </li>

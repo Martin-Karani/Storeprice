@@ -1,12 +1,12 @@
 import React, { useContext, useState } from "react";
-import { AuthContext } from "../context/auth";
-import { GET_PRODUCT } from "../graphql/queries";
+import { AuthContext } from "./context/auth";
+import { GET_PRODUCT } from "./graphql/queries";
 import { NetworkStatus, useQuery } from "@apollo/client";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import Image from "next/image";
 
-import { ScrollToTop } from "../utils";
+// import { ScrollToTop } from "../utils";
 import { ViewRating } from "../components/Rating";
 import NavBar from "../components/NavBar";
 import Footer from "../components/Footer";
@@ -18,19 +18,21 @@ import Questions from "../components/Questions";
 import LargeNavBAr from "../components/LargeNavBAr";
 import Loader from "../components/Loader";
 
-import { ReactComponent as Tick } from "../public/tick.svg";
-import { ReactComponent as Heart } from "../public/heart.svg";
-import { ReactComponent as HeartFill } from "../public/heartFull.svg";
-import { ReactComponent as Negative } from "../public/cancel-mark.svg";
+import Tick from "../public/tick.svg";
+import Heart from "../public/heart.svg";
+import HeartFill from "../public/heartFull.svg";
+import Negative from "../public/cancel-mark.svg";
 import Samsung from "../public/samsung.jpeg";
-import styles from ".ProductDetails.module.css";
+
+import styles from "../styles/ProductDetails.module.css";
 
 function ProductDetails() {
-  ScrollToTop();
+  // ScrollToTop();
   const [toggleSimilar, setToggleSimilar] = useState(false);
   const { user } = useContext(AuthContext);
   const router = useRouter();
-  const id = router.query;
+  const name = router.query;
+
   const [toggleFavorite, setToggleFavorite] = useState(false);
   const {
     loading,
@@ -39,23 +41,24 @@ function ProductDetails() {
     refetch: getProductRefetch,
     networkStatus,
   } = useQuery(GET_PRODUCT, {
-    variables: { productId: id },
+    variables: { category: "Phones", productName: name.productTitle },
     notifyOnNetworkStatusChange: true,
   });
 
   if (loading || networkStatus === NetworkStatus.refetch) return <Loader />;
-  if (error) return "error";
+  // if (error) return "error";
   const product = data.getProduct;
 
   return (
     <>
-      {window.innerWidth > 960 ? <LargeNavBAr /> : <NavBar />}
+      <NavBar />
+      <LargeNavBAr />
       <div className={styles["product-details"]}>
         <div className={styles["grid"]}>
           <ul className={styles["img-slider"]}>
             {[...Array(6)].map((_, index) => (
               <li key={index}>
-                <img src={Samsung} alt="" />
+                <Image src={Samsung} alt="" />
               </li>
             ))}
           </ul>
@@ -69,25 +72,14 @@ function ProductDetails() {
             <h3 className={styles["details-brand"]}>SAMSUNG</h3>
             <h2 className={styles["phone-details__name"]}>{product.name}</h2>
             <div
-              className={"flex-row" + styles["favorite-icon"]}
+              className={"flex-row " + styles["favorite-icon"]}
               onClick={() => setToggleFavorite(!toggleFavorite)}
             >
               {toggleFavorite ? (
-                <HeartFill
-                  style={{
-                    height: "15px",
-                    width: "15px",
-                    fill: "red",
-                  }}
-                />
+                <Image src={HeartFill} alt="" height="15px" width="15px" />
               ) : (
                 <>
-                  <Heart
-                    style={{
-                      height: "15px",
-                      width: "15px",
-                    }}
-                  />
+                  <Image src={HeartFill} alt="" height="15px" width="15px" />
                 </>
               )}
             </div>
@@ -95,41 +87,33 @@ function ProductDetails() {
               <li className="">Key Features:</li>
               {product.quickFeatures.map((feature, index) => (
                 <li
-                  className={styles["positive"] + "flex-row align-center"}
+                  className={styles["positive "] + "flex-row align-center"}
                   key={index}
                 >
                   {feature.positive ? (
-                    <Tick
-                      className={styles["tick"]}
-                      fill="green"
-                      style={{ marginRight: "5px" }}
-                    />
+                    <Image src={Tick} alt="" width="10px" height="10px" />
                   ) : (
-                    <Negative
-                      className={styles["tick"]}
-                      fill="red"
-                      style={{ marginRight: "5px" }}
-                    />
+                    <Image src={Negative} alt="" width="10px" height="10px" />
                   )}
 
                   <span>{feature.feature}</span>
                 </li>
               ))}
             </ul>
-            <ul className={styles["details-imgs"]}>
+            {/* <ul className={styles["details-imgs"]}>
               <li className={styles["details-img"]}>
-                <img src="#" alt="" />
+                <Image src={Samsung} alt="" height="50px" width="50px" />
               </li>
               <li className={styles["details-img"]}>
-                <img src="#" alt="" />
+                <Image src={Samsung} alt="" height="50px" width="50px" />
               </li>
               <li className={styles["details-img"]}>
-                <img src="#" alt="" />
+                <Image src={Samsung} alt="" height="50px" width="50px" />
               </li>
               <li className={styles["details-img"]}>
-                <img src="#" alt="" />
+                <Image src={Samsung} alt="" height="50px" width="50px" />
               </li>
-            </ul>
+            </ul> */}
           </div>
           <div className={styles["details-right"]}>
             <div className="">
@@ -140,7 +124,7 @@ function ProductDetails() {
                 }
               >
                 <p>Ratings</p>
-                <ViewRating />
+                {/* <ViewRating /> */}
               </div>
             </div>
 
@@ -155,16 +139,16 @@ function ProductDetails() {
             <h4> Colors: </h4>
             <ul className={styles["variations-list"]}>
               <li>
-                <img src="#" alt="" />
+                <Image src={Samsung} alt="" height="50px" width="50px" />
               </li>
               <li>
-                <img src="#" alt="" />
+                <Image src={Samsung} alt="" height="50px" width="50px" />
               </li>
               <li>
-                <img src="#" alt="" />
+                <Image src={Samsung} alt="" height="50px" width="50px" />
               </li>
               <li>
-                <img src="#" alt="" />
+                <Image src={Samsung} alt="" height="50px" width="50px" />
               </li>
             </ul>
           </div>
@@ -259,7 +243,7 @@ function ProductDetails() {
                 {[...Array(5)].map((_, index) => (
                   <td key={index}>
                     <div className={styles["more-like__img"]}>
-                      <img src={Samsung} alt="" />
+                      <img src={Samsung} alt="" width="120px" />
                     </div>
                     <div className={styles["more-like__product-name"]}>
                       Samsung S9 Plus
@@ -267,7 +251,7 @@ function ProductDetails() {
                     <div className={styles["more-like__product-price"]}>
                       KSH 40,000
                     </div>
-                    <ViewRating />
+                    {/* <ViewRating /> */}
                   </td>
                 ))}
               </tr>

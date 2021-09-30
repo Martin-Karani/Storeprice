@@ -112,11 +112,11 @@
   top: 0;
   right: 0;
 }
-label > input[type="checkbox"],
-label > input[type="radio"] {
+.products label > input[type="checkbox"],
+.products label > input[type="radio"] {
   display: none;
 }
-label > input[type="checkbox"] + *::before {
+.products label > input[type="checkbox"] + *::before {
   content: "";
   display: inline-block;
   vertical-align: bottom;
@@ -127,7 +127,7 @@ label > input[type="checkbox"] + *::before {
   border-radius: 10%;
   border: 0.1rem solid rgba(0, 0, 0, 0.493);
 }
-label > input[type="checkbox"]:hover + *::before {
+.products label > input[type="checkbox"]:hover + *::before {
   border: 2px solid palevioletred;
 }
 .filter-values label > input[type="checkbox"] + *::before {
@@ -137,18 +137,18 @@ label > input[type="checkbox"]:hover + *::before {
   top: 0.8rem;
   right: 0.5em;
 }
-label > input[type="checkbox"]:checked + *::before {
+.products label > input[type="checkbox"]:checked + *::before {
   content: "";
   color: white;
   text-align: center;
   background-color: palevioletred;
-  background-image: url("../resources/right-tick.svg");
+  background-image: url("../public/right-tick.svg");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
   border-color: palevioletred;
 }
-label > input[type="checkbox"]:checked {
+.products label > input[type="checkbox"]:checked {
   color: palevioletred;
 }
 

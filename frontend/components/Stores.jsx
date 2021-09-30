@@ -1,6 +1,6 @@
 import React from "react";
 import NavBar from "./NavBar";
-import styles from "./Stores.module.css";
+import styles from "../styles/Stores.module.css";
 
 function Stores() {
   return (

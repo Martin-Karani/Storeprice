@@ -25,7 +25,7 @@ function Home() {
     <div className="App">
       <div className="App-header">
         {/* <CompareProductCard /> */}
-        {/* <BottomNav /> */}
+        <BottomNav />
         <Header />
         <Space />
         <ProductCardContainer />

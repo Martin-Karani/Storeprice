@@ -1,5 +1,5 @@
 import React from "react";
-import { ReactComponent as Rate } from "../public/star.svg";
+import Rate from "../public/star.svg";
 const RATING = 4;
 
 export function ViewRating() {
@@ -8,12 +8,14 @@ export function ViewRating() {
       {[...Array(5)].map((star, i) => {
         const ratingValue = i + 1;
         return (
-          <Rate
+          <Image
+            src={Rate}
+            alt=""
             className="star"
-            key={i}
-            style={
-              ratingValue <= RATING ? { fill: "#ffc107" } : { fill: "#e4e5e9" }
-            }
+            // key={i}
+            // style={
+            //   ratingValue <= RATING ? { fill: "#ffc107" } : { fill: "#e4e5e9" }
+            // }
           />
         );
       })}

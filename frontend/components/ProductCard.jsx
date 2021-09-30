@@ -3,7 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import Samsung from "../public/samsung.jpeg";
 
-import styles from "./ProductCardContainer.module.css";
+import styles from "../styles/ProductCardContainer.module.css";
 
 function ProductCard({ item }) {
   return (

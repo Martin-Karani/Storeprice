@@ -1,22 +1,25 @@
 import React, { useContext } from "react";
-import NavBar from "./NavBar";
-import Loader from "./Loader";
 import Image from "next/image";
-
-import { GET_SELECTED_PRODUCTS } from "../graphql/queries";
 import { useQuery } from "@apollo/client";
+
+import { GET_SELECTED_PRODUCTS } from "./graphql/queries";
 import { AuthContext } from "./context/auth";
 
-import styles from "./CompareCard.module.css";
-import Samsung from "../public/samsung.jpeg";
+import Loader from "./Loader";
+import NavBar from "./NavBar";
 import { ViewRating } from "./Rating";
 import LargeNavBAr from "./LargeNavBAr";
 
+import Samsung from "../public/samsung.jpeg";
+import styles from "../styles/CompareCard.module.css";
+
 function CompareProductCard() {
   const { selectedProducts } = useContext(AuthContext);
+
   let productIds = [];
+
   selectedProducts.forEach((product) => productIds.push(product.productId));
-  console.log(productIds);
+
   const { loading, data } = useQuery(GET_SELECTED_PRODUCTS, {
     onError(err) {
       console.log(err);
@@ -24,10 +27,11 @@ function CompareProductCard() {
     variables: { productIds: productIds },
     // variables: [...productIds],
   });
-  console.log(data);
+
   return (
     <div className={styles["compare-page"]}>
-      {window.innerWidth > 960 ? <LargeNavBAr /> : <NavBar />}
+      <LargeNavBAr />
+      <NavBar />
       {loading || !data ? (
         <Loader />
       ) : (
@@ -57,7 +61,7 @@ function CompareProductCard() {
                     <button className={styles["compare-product__view-more"]}>
                       View More
                     </button>
-                    <ViewRating />
+                    {/* <ViewRating /> */}
                   </td>
                 ))}
               </tr>

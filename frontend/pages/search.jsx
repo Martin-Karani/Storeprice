@@ -1,12 +1,14 @@
 import React from "react";
-import { ReactComponent as SearchIcon } from "../public/search.svg";
-import styles from "./Search.module.css"; /*  */
 import { useRouter } from "next/router";
 import Link from "next/link";
-import useForm from "../useForm";
+import Image from "next/image";
+import SearchIcon from "../public/search.svg";
+import useForm from "../components/hooks/useForm";
+
+import styles from "../styles/Search.module.css"; /*  */
 
 function Search() {
-  const history = useHistory();
+  const router = useRouter();
   const { input, handleSubmit, handleChange } = useForm(search, {});
 
   function search() {}
@@ -14,7 +16,7 @@ function Search() {
     <div>
       <div className={styles["search"]}>
         <div className={styles["search__content"]}>
-          <button className="x" onClick={() => history.goBack()}>
+          <button className={styles["x"]} onClick={() => router.back()}>
             &times;
           </button>
           <input
@@ -23,12 +25,13 @@ function Search() {
             placeholder="Search..."
             name="search"
             value={input.search}
+            autoComplete="off"
             onChange={handleChange}
           />
 
           <Link href="/searchresults">
-            <button className="svg-wrapper" onClick={handleSubmit}>
-              <SearchIcon />
+            <button className={styles["svg-wrapper"]} onClick={handleSubmit}>
+              <Image src={SearchIcon} alt="" height="20px" width="20px" />
             </button>
           </Link>
         </div>
@@ -46,7 +49,7 @@ function Search() {
           </div>
         </div>
       </div>
-      {/* <div className="overlay" onClick={() => history.goBack()}></div> */}
+      <div className="overlay" onClick={() => router.back()}></div>
     </div>
   );
 }

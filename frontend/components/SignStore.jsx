@@ -1,11 +1,13 @@
 import React, { useContext } from "react";
-import { useRouter } from 'next/router'
-import Link from 'next/link'
+import { useRouter } from "next/router";
+import Link from "next/link";
 
-import useForm from "../useForm";
+import useForm from "./hooks/useForm";
 import { useMutation } from "@apollo/client";
-import { AuthContext } from "../context/auth";
-import { CREATE_STORE } from "../graphql/Mutations";
+import { AuthContext } from "./context/auth";
+import { CREATE_STORE } from "./graphql/Mutations";
+
+import styles from "../styles/Login.module.css";
 
 function SignStore() {
   const context = useContext(AuthContext);
@@ -26,7 +28,7 @@ function SignStore() {
     update(_, { data: { createStore: useData } }) {
       context.login(useData);
       console.log(useData);
-      router.push("/stores/webstores/" + useData.storeId);
+      router.push("/stores/" + useData.storeId);
     },
     onError(err) {
       // console.log(err.graphQLErrors[0].extensions.exception.errors);
@@ -45,20 +47,20 @@ function SignStore() {
   }
 
   return (
-    <div className="sign-store">
-      <div className="sign-store__message">Create our WebStore</div>
-      <div className="login__input">
+    <div className={styles["sign-store"]}>
+      <div className={styles["sign-store__message"]}>Create our WebStore</div>
+      <div className={styles["login__input"]}>
         <label>Store Name</label>
         <input
           type="text"
           name="userName"
-          className="login__email"
+          className={styles["login__email"]}
           onChange={handleChange}
           value={input.userName}
           placeholder="e.g Tuskys"
         />
       </div>
-      <div className="login__input">
+      <div className={styles["login__input"]}>
         <select value={input.town} onChange={handleChange} name="town">
           <option>Select Your town</option>
           {["Nairobi", "Machakos", "Makueni", "Mombasa"].map((town) => (
@@ -66,7 +68,7 @@ function SignStore() {
           ))}
         </select>
       </div>
-      <div className="login__input">
+      <div className={styles["login__input"]}>
         <label>Location</label>
         <textarea
           name="location"
@@ -77,60 +79,60 @@ function SignStore() {
           placeholder="e.g Kitaot Road along Mititi"
         ></textarea>
       </div>
-      <div className="login__input">
+      <div className={styles["login__input"]}>
         <label>Email</label>
         <input
           type="search"
           name="email"
           onChange={handleChange}
           value={input.email}
-          className="login__email"
+          className={styles["login__email"]}
           placeholder="e.g martih@gmail.com"
         />
       </div>
-      <div className="login__input">
+      <div className={styles["login__input"]}>
         <label>Phone Number</label>
         <input
           type="number"
           name="phoneNo"
           onChange={handleChange}
           value={input.phoneNo}
-          className="signup__number"
+          className={styles["signup__number"]}
           placeholder=" e.g 0701855316"
         />
       </div>
-      <div className="login__input">
+      <div className={styles["login__input"]}>
         <label>Password</label>
         <input
           type="password"
           name="password"
           onChange={handleChange}
           value={input.password}
-          className="login__password"
+          className={styles["login__password"]}
           placeholder="wekr84-20256"
         />
       </div>
-      <div className="login__input">
+      <div className={styles["login__input"]}>
         <label>Confirm Password</label>
         <input
           type="password"
           name="confirmPassword"
           onChange={handleChange}
           value={input.confirmPassword}
-          className="login__password"
+          className={styles["login__password"]}
           placeholder="wekr84-20256"
         />
       </div>
 
-      <button className="login__btn" onClick={handleSubmit}>
+      <button className={styles["login__btn"]} onClick={handleSubmit}>
         SignUp
         {/* <span>
           <RightArrow />
         </span> */}
       </button>
-      <div className="login__or">or Already have an account ??</div>
+      <div className={styles["login__or"]}>or Already have an account ??</div>
       <Link href="/login">
-        <button className="login__signUp-btn">Login</button>
+        <button className={styles["login__signUp-btn"]}>Login</button>
       </Link>
       {/* <div className="signUpOutput">
         <div className="signUpOutput__svg">

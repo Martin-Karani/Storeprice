@@ -1,4 +1,5 @@
-import  { useState } from "react";
+import { useState } from "react";
+import styles from "../styles/Filter.module.css";
 
 const initialstate = {
   brand: [],
@@ -6,6 +7,7 @@ const initialstate = {
   storage: [],
   ram: [],
 };
+
 function FilterMore({ visible }) {
   const [currentCategory, setCurrentCategory] = useState("price");
   const [inputFilter, setInputFilter] = useState(initialstate);
@@ -32,17 +34,19 @@ function FilterMore({ visible }) {
   };
   return (
     <>
-      <div className="filterMore">
-        <div className="flex-row justify-space-btwn filter-title">
+      <div className={styles["filterMore"]}>
+        <div
+          className={"flex-row justify-space-btwn " + styles["filter-title"]}
+        >
           <button className="close" onClick={() => visible(false)}>
             &times;
           </button>
           <div>
             <div className="category-name">
               Filters
-              <p className="total-filter-products">4849 Products</p>
+              <p className={styles["total-filter-products"]}>4849 Products</p>
             </div>
-            <ul className="flex-row current-filters">
+            <ul className={"flex-row " + styles["current-filters"]}>
               {Object.values(inputFilter).map(
                 (value) =>
                   value.length > 0 && value.map((val) => <li>{val}</li>)
@@ -50,13 +54,13 @@ function FilterMore({ visible }) {
             </ul>
           </div>
           <button
-            className="reset-filter-btn"
+            className={styles["reset-filter-btn"]}
             onClick={() => setInputFilter({})}
           >
             Reset Filters
           </button>
         </div>
-        <div className="filter-keys">
+        <div className={styles["filter-keys"]}>
           <label className={currentCategory === "brand" && "active"}>
             <input
               type="radio"
@@ -103,7 +107,7 @@ function FilterMore({ visible }) {
             Ram
           </label>
         </div>
-        <ul className="filter-values">
+        <ul className={styles["filter-values"]}>
           {currentCategory === "price" ? (
             <>
               <li className="category-name">Price</li>
@@ -127,7 +131,7 @@ function FilterMore({ visible }) {
                     value="Samsung"
                     onClick={handleValueChange}
                   />
-                  Samsung <span className="no-of-items">(400)</span>
+                  Samsung <span className={styles["no-of-items"]}>(400)</span>
                 </label>
               </li>
               <li className="flex-row align-center">
@@ -138,7 +142,7 @@ function FilterMore({ visible }) {
                     value="Apple"
                     onClick={handleValueChange}
                   />
-                  Apple <span className="no-of-items">(12)</span>
+                  Apple <span className={styles["no-of-items"]}>(12)</span>
                 </label>
               </li>
               <li className="flex-row align-center">
@@ -149,7 +153,7 @@ function FilterMore({ visible }) {
                     value="Nokia"
                     onClick={handleValueChange}
                   />
-                  Nokia <span className="no-of-items">(50)</span>
+                  Nokia <span className={styles["no-of-items"]}>(50)</span>
                 </label>
               </li>
             </>
@@ -157,12 +161,14 @@ function FilterMore({ visible }) {
         </ul>
 
         <button
-          className="btn-cancel filter-cancel"
+          className={styles["btn-cancel "] + styles["filter-cancel"]}
           onClick={() => visible(false)}
         >
           Cancel
         </button>
-        <button className="btn-post filter-apply">Apply Filters</button>
+        <button className={styles["btn-post "] + styles["filter-apply"]}>
+          Apply Filters
+        </button>
       </div>
       <div className="overlay" onClick={() => visible(false)}></div>
     </>

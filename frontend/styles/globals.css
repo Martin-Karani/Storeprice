@@ -319,7 +319,92 @@ span.start::before {
 .menu ul {
   z-index: 5;
 }
+
+/* ------------Bottom NAv ------------ */
+.bottomNav {
+  position: fixed;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 7;
+  border-radius: 5px;
+  padding: 0.4em 1em;
+  /* transition: bottom 0.6s; */
+  bottom: 1rem;
+  right: 1.2rem;
+  left: 1.2rem;
+  margin: auto;
+  color: #fff;
+  background-color: black;
+}
+/* .bottomNav--hidden {
+  bottom: -1.5rem;
+} */
+.bottomNav p,
+.bottomNav a {
+  color: #fff;
+  font-size: 0.7rem;
+  margin-top: 0.3rem;
+  text-align: center;
+}
+.add-icon-wrapper {
+  padding: 0.6em 0.7em;
+  background-color: rgba(36, 36, 36, 0.582);
+  border-radius: 5px;
+}
+.add-price > * {
+  padding: 0.5rem;
+}
+.add-price {
+  position: fixed;
+  right: 0;
+  left: 0;
+  text-align: center;
+  z-index: 7;
+  bottom: 0rem;
+  padding: 1rem;
+  background-color: #fff;
+  border-top-left-radius: 7px;
+  border-top-right-radius: 7px;
+}
+.add-price div {
+  color: #000;
+}
+.back-icon-wrapper,
+.nav-bar__header-right {
+  position: sticky;
+}
+.nav-all-categories {
+  overflow: auto;
+}
+
+.nav-all-categories {
+  padding: 1rem;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  z-index: 8;
+  background-color: #fff;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+.nav-all-categories ul {
+  overflow: auto;
+}
+.nav-all-categories .category-name {
+  position: sticky;
+  top: 0;
+  background-color: #fff;
+}
+.nav-all-categories li {
+  padding: 0.3rem;
+}
+
 @media screen and (min-width: 900px) {
+  .destop-none {
+    display: none;
+  }
   .App {
     width: 98%;
     position: relative;

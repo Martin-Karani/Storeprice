@@ -1,9 +1,10 @@
 import React, { useContext, useState } from "react";
-
-import { AuthContext } from "../context/auth";
+import Image from "next/image";
+import { AuthContext } from "./context/auth";
 import MultiRangeSlider from "./MultiRangeSlider";
 
-import { ReactComponent as DropDownIcon } from "../resources/down-arrow.svg";
+import DropDownIcon from "../public/down-arrow.svg";
+import styles from "../styles/ProductsPage.module.css";
 
 function Filter2() {
   const [filters, setFilters] = useState({});
@@ -30,12 +31,14 @@ function Filter2() {
   };
 
   return (
-    <div className="filter2">
+    <div className={styles["filter2"]}>
       <h1 className="category-name">Filters</h1>
-      <div className="flex-row filter2-sort">
+      <div className={styles["filter2-sort"]}>
         <button
           className={
-            toggleSelected ? "compare-btn compare-active" : "compare-btn"
+            toggleSelected
+              ? styles["compare-btn"] + styles["compare-active"]
+              : styles["compare-btn"]
           }
           onClick={handleCompare}
         >
@@ -52,29 +55,29 @@ function Filter2() {
         </select>
       </div>
 
-      <ul className="filter-list">
+      <ul className={styles["filter-list"]}>
         <div>
           <input
             type="checkbox"
             name="price"
-            id="filter-price"
+            id={styles["filter-price"]}
             className="none"
             onChange={handleCompareFilterField}
           />
 
           <label htmlFor="filter-price">
-            <div className="flex-row justify-space-btwn filter2-title">
-              <h3 className="filter2-price">Price</h3>
+            <div className={styles["filter2-title"]}>
+              <h3 className={styles["filter2-price"]}>Price</h3>
               {filters.price === true ? (
-                <DropDownIcon
-                  style={{
-                    height: "10px",
-                    width: "10px",
-                    transform: "rotate(180deg)",
-                  }}
+                <Image
+                  src={DropDownIcon}
+                  alt=""
+                  height="10px"
+                  width="10px"
+                  style={{ transform: "rotate(180deg)" }}
                 />
               ) : (
-                <DropDownIcon style={{ height: "10px", width: "10px" }} />
+                <Image src={DropDownIcon} alt="" height="10px" width="10px" />
               )}
             </div>
           </label>
@@ -97,44 +100,41 @@ function Filter2() {
             className="none"
             onChange={handleCompareFilterField}
           />
-          <label
-            htmlFor="filter-ram"
-            className="flex-row justify-space-btwn filter2-title"
-          >
+          <label htmlFor="filter-ram" className={styles["filter2-title"]}>
             <h3>Ram</h3>
             {filters.ram === true ? (
-              <DropDownIcon
-                style={{
-                  height: "10px",
-                  width: "10px",
-                  transform: "rotate(180deg)",
-                }}
+              <Image
+                src={DropDownIcon}
+                alt=""
+                height="10px"
+                width="10px"
+                style={{ transform: "rotate(180deg)" }}
               />
             ) : (
-              <DropDownIcon style={{ height: "10px", width: "10px" }} />
+              <Image src={DropDownIcon} alt="" height="10px" width="10px" />
             )}
           </label>
           {(filters.ram === undefined || filters.ram === true) && (
             <>
-              <label className="filter2-item">
-                <input type="checkbox" name="" className="start" />
+              <label className={styles["filter2-item"]}>
+                <input type="checkbox" name="" className={styles["start"]} />
                 <span className="">4GB</span>
-                <p className="no-of-items">(45)</p>
+                <p className={styles["no-of-items"]}>(45)</p>
               </label>
-              <label className="filter2-item">
-                <input type="checkbox" name="" className="start" />
+              <label className={styles["filter2-item"]}>
+                <input type="checkbox" name="" className={styles["start"]} />
                 <span className="">6GB</span>
-                <p className="no-of-items">(45)</p>
+                <p className={styles["no-of-items"]}>(45)</p>
               </label>
-              <label className="filter2-item">
-                <input type="checkbox" name="" className="start" />
+              <label className={styles["filter2-item"]}>
+                <input type="checkbox" name="" className={styles["start"]} />
                 <span className="">8GB</span>
-                <p className="no-of-items">(45)</p>
+                <p className={styles["no-of-items"]}>(45)</p>
               </label>
-              <label className="filter2-item">
-                <input type="checkbox" name="" className="start" />
+              <label className={styles["filter2-item"]}>
+                <input type="checkbox" name="" className={styles["start"]} />
                 <span className="">16GB</span>
-                <p className="no-of-items">(45)</p>
+                <p className={styles["no-of-items"]}>(45)</p>
               </label>
             </>
           )}

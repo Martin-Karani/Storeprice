@@ -58,7 +58,7 @@
   color: rgb(245, 84, 84);
   font-size: 0.7rem;
 } */
-label {
+.login label {
   display: inline;
 }
 .input-error {
@@ -111,7 +111,7 @@ label {
   padding: 0.7em 3em;
   border-radius: 5px;
   font-size: 1rem;
-  margin: 1em;
+  margin: 0.7em;
 }
 .login__btn {
   background-color: #000;
@@ -123,6 +123,103 @@ label {
 }
 .login__or {
   margin: 0.5em;
+}
+
+.signup-container {
+  position: relative;
+}
+.shoprice,
+.signup-option,
+.sign-welcome,
+.signup-option button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.signup {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  z-index: 3;
+  right: 0;
+  display: flex;
+  border-radius: 15px;
+  padding: 1.4em 0;
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
+    rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+  background-color: #fff;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
+}
+/* .shoprice {
+  height: 50vh;
+} */
+
+.sign-welcome {
+  height: 40vh;
+  font-size: 1.3rem;
+}
+.signup-option {
+  margin-bottom: 0.5rem;
+}
+.signup-option button {
+  flex-direction: row;
+
+  font-weight: 500;
+  /* margin: 0 0 0 4em; */
+  width: 70vw;
+  border-radius: 5px;
+  padding: 1em;
+}
+.signup-option p {
+  font-size: 0.8rem;
+  font-size: 400;
+  color: rgb(63, 62, 62);
+  padding: 0.5em;
+}
+.signup-arrow {
+  display: inline-block;
+  margin: 0.3em 0 0 0.5em;
+}
+.signup-arrow svg {
+  width: 15px;
+  height: 15px;
+}
+.signup-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5em;
+  width: 40vw;
+  border-radius: 5px;
+  margin: 0.5em 2.5rem 0 0;
+  /* margin-left: auto; */
+
+  background-color: #000;
+  color: #fff;
+}
+.signup-btn svg {
+  height: 15px;
+  width: 15px;
+  margin-left: 1rem;
+  fill: #fff;
+}
+.sign-store__message {
+  height: 20vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2rem;
+}
+.signUpOutput {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background-color: #fff;
 }
 
 @media screen and (min-width: 900px) {

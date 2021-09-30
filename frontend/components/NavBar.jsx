@@ -1,12 +1,14 @@
 import { useContext, useState } from "react";
-import { ReactComponent as SearchIcon } from "../public/search.svg";
-import { ReactComponent as Back } from "../public/left-arrow.svg";
-// import { ReactComponent as MenuIcon } from "../resources/menu.svg";
-import styles from "./NavBar.module.css";
 import { useRouter } from "next/router";
+import Image from "next/image";
+
+import SearchIcon from "../public/search.svg";
+import Back from "../public/left-arrow.svg";
+import styles from "../styles/NavBar.module.css";
 
 import { AuthContext } from "./context/auth";
 // import SignUp from "../SignUp";
+// import { ReactComponent as MenuIcon } from "../resources/menu.svg";
 // import { ReactComponent as UserIcon } from "../resources/user.svg";
 // import { ReactComponent as BellIcon } from "../resources/bell.svg";
 // import { ReactComponent as StoreIcon } from "../resources/store.svg";
@@ -17,8 +19,10 @@ import { AuthContext } from "./context/auth";
 export function BackFunction() {
   const router = useRouter();
   return (
-    <Back
-      style={{ height: "15px", width: "15px", margin: "auto" }}
+    <Image
+      src={Back}
+      height="15px"
+      width="15px"
       onClick={() => router.back()}
     />
   );
@@ -45,9 +49,7 @@ function NavBar({ name }) {
             className={styles["search-icon-wrapper"]}
             onClick={() => router.push("/search")}
           >
-            <SearchIcon
-              style={{ height: "17px", width: "17px", margin: "auto" }}
-            />
+            <Image src={SearchIcon} alt="" height={17} width={17} />
           </div>
         </div>
       </div>

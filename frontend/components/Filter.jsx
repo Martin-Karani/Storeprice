@@ -1,10 +1,11 @@
 import React, { useContext, useState } from "react";
-import useRouter from 'next/router'
+import { useRouter } from "next/router";
 import { AuthContext } from "./context/auth";
-import useForm from "../useForm";
+import useForm from "./hooks/useForm";
 import FilterMore from "./FilterMore";
 import Sort from "./Sort";
 
+import styles from "../styles/Filter.module.css";
 function Filter() {
   const [isSortVisible, setIsSortVisible] = useState(false);
   const [isFilterVisible, setIsFilterVisible] = useState(false);
@@ -12,19 +13,25 @@ function Filter() {
     useContext(AuthContext);
 
   const router = useRouter();
+
   const handleCompare = () => {
     toggleSelected ? router.push("/compare") : setToggleSelected();
   };
 
   return (
-    <div className="filters">
-      <div className="filter-container">
-        <button className="sort-btn" onClick={() => setIsSortVisible(true)}>
+    <div className={styles["filters"]}>
+      <div className={styles["filter-container"]}>
+        <button
+          className={styles["sort-btn"]}
+          onClick={() => setIsSortVisible(true)}
+        >
           SORT BY
         </button>
         <button
           className={
-            toggleSelected ? "compare-btn compare-active" : "compare-btn"
+            toggleSelected
+              ? styles["compare-btn "] + styles["compare-active"]
+              : styles["compare-btn"]
           }
           onClick={handleCompare}
         >
@@ -32,7 +39,10 @@ function Filter() {
             ? `Compare(${selectedProducts.length})`
             : "Add To Compare"}
         </button>
-        <button className="filter-btn" onClick={() => setIsFilterVisible(true)}>
+        <button
+          className={styles["filter-btn"]}
+          onClick={() => setIsFilterVisible(true)}
+        >
           FILTER
         </button>
       </div>

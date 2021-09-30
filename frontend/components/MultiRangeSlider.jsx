@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 
-import styles from "./MultiRangeSlider.module.css";
+import styles from "../styles/MultiRangeSlider.module.css";
 const MultiRangeSlider = ({ min, max, onChange }) => {
   const [minVal, setMinVal] = useState(min);
   const [maxVal, setMaxVal] = useState(max);
@@ -77,7 +77,7 @@ const MultiRangeSlider = ({ min, max, onChange }) => {
       <div className={styles["slider"]}>
         <div className={styles["slider__track"]} />
         <div ref={range} className={styles["slider__range"]} />
-        <div className="flex-row justify-space-around">
+        <div style={{ display: "flex", justifyContent: "space-around" }}>
           <input
             type="number"
             name="minVal"
@@ -85,7 +85,7 @@ const MultiRangeSlider = ({ min, max, onChange }) => {
             value={minVal}
             onChange={handleVal}
           />
-          <p className="to">To</p>
+          <p className={styles["to"]}>To</p>
           <input
             type="number"
             name="maxVal"

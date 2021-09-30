@@ -561,6 +561,9 @@
   color: #313131;
 }
 @media screen and (min-width: 900px) {
+  .stores__online-card {
+    flex-basis: 50%;
+  }
   .product-details {
     margin: 0.2rem 1rem;
   }
@@ -644,12 +647,10 @@
     margin-right: 0;
   }
   .desktop-flex {
-    display: flex;
-    flex-direction: row;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     width: 100%;
-
     gap: 3rem;
-    justify-content: space-between;
   }
   .stores__online,
   .shop-nearby {

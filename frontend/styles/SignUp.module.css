@@ -39,12 +39,12 @@
 }
 .signup-option button {
   flex-direction: row;
-
+  background: var(--gray-003);
   font-weight: 500;
   /* margin: 0 0 0 4em; */
   width: 70vw;
   border-radius: 5px;
-  padding: 1em;
+  padding: 0.5em;
 }
 .signup-option p {
   font-size: 0.8rem;

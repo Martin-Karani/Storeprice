@@ -1,11 +1,15 @@
 import React, { useContext, useState } from "react";
-import  Link  from "next/link";
-import { ReactComponent as SearchIcon } from "../public/search.svg";
-import { ReactComponent as UserIcon } from "../public/user.svg";
-import { ReactComponent as DropDownIcon } from "../public/down-arrow.svg";
+import Link from "next/link";
+import Image from "next/image";
 import { AuthContext } from "./context/auth";
-import { ReactComponent as LogoutIcon } from "../public/logout.svg";
-import { ReactComponent as HeartIcon } from "../public/heart.svg";
+
+import SearchIcon from "../public/search.svg";
+import UserIcon from "../public/user.svg";
+import DropDownIcon from "../public/down-arrow.svg";
+import LogoutIcon from "../public/logout.svg";
+import HeartIcon from "../public/heart.svg";
+
+import styles from "../styles/NavBar.module.css";
 //
 function LargeNavBAr() {
   const { user, logout } = useContext(AuthContext);
@@ -16,70 +20,77 @@ function LargeNavBAr() {
   };
 
   return (
-    <div className="large-nav-bar flex-row justify-space-btwn">
+    <div className={styles["large-nav-bar"]}>
       <h1 className="category-name">SHOPRICE</h1>
 
-      <div className="search-wrapper">
+      <div className={styles["search-wrapper"]}>
         <input
           type="search"
           placeholder="Search..."
           name="search"
-          className="large-search"
+          className={styles["large-search"]}
         />
 
-        <Link to="/searchresults">
+        <Link href="/searchresults">
           <button className="svg-wrapper">
-            <SearchIcon
-              style={{ height: "20px", width: "20px", fill: "palevioletred" }}
-              className="large-search-icon"
+            <Image
+              src={SearchIcon}
+              alt=""
+              width="20px"
+              height="20px"
+              className={styles["large-search-icon"]}
             />
           </button>
         </Link>
       </div>
 
-      <div className="nav-name">Stores NearBy</div>
-      <div className="nav-name">Recently Visited</div>
-      <div className="nav-name flex-row">
-        <HeartIcon
-          style={{ width: "15px", fill: "palevioletred", height: "15px" }}
-        />
+      <div className={styles["nav-name"]}>Stores NearBy</div>
+      <div className={styles["nav-name"]}>Recently Visited</div>
+      <div className={styles["nav-name"] + "flex-row"}>
+        <Image src={HeartIcon} alt="" width="15px" height="15px" />
         Favorites
       </div>
       {user ? (
         <div className="relative">
-          <button
-            className="flex-row menu-item align-center"
-            onClick={handleToggleUser}
-          >
-            <div className="profile-img"></div>
+          <button className={styles["menu-item"]} onClick={handleToggleUser}>
+            <div className={styles["profile-img"]}></div>
             <div>
               <p>Hello,{user.userName}</p>
             </div>
           </button>
           {toggleUser && (
             <>
-              <div className="userMore">
+              <div className={styles["userMore"]}>
                 <button className="flex-row">
                   <div className="">
-                    <UserIcon
-                      style={{
-                        height: "15px",
-                        width: "15px",
-                        marginRight: "0.7em",
-                        fill: "palevioletred",
-                      }}
+                    <Image
+                      src={UserIcon}
+                      alt=""
+                      height="15px"
+                      width="15px"
+                      // style={{
+                      //   marginRight: "0.7em",
+                      //   fill: "palevioletred",
+                      // }}
                     />
                   </div>
                   View Profile
                 </button>
-                <button className="flex-row menu-item" onClick={() => logout()}>
+                <button
+                  className={styles["menu-item"]}
+                  onClick={() => logout()}
+                >
                   <div>
-                    <LogoutIcon
-                      style={{
-                        height: "15px",
-                        width: "15px",
-                        fill: "palevioletred",
-                      }}
+                    <Image
+                      src={LogoutIcon}
+                      alt=""
+                      height="15px"
+                      width="15px"
+                      // style={{
+                      //   height: "15px",
+                      //   width: "15px",
+                      //   fill: "palevioletred",
+                      // }}
                     />
                   </div>
                   LogOut
@@ -93,13 +104,11 @@ function LargeNavBAr() {
           )}
         </div>
       ) : (
-        <div className="flex-row menu-item">
+        <div className={styles["menu-item"]}>
           <div className="login-icon">
-            <UserIcon
-              style={{ height: "20px", width: "20px", fill: "palevioletred" }}
-            />
+            <Image src={UserIcon} alt="" height="20px" width="20px" />
           </div>
-          <Link to="/login"> Sign In</Link>
+          <Link href="/login"> Sign In</Link>
         </div>
       )}
     </div>

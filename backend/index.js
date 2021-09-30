@@ -22,5 +22,5 @@ server.initDb((err) => {
     console.log("cannot make the connection");
   }
   apollo.listen(5000);
-  console.log("listening to port 4000");
+  console.log("listening to port 5000");
 });

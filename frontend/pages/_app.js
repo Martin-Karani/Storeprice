@@ -1,4 +1,5 @@
 import "../styles/resetter.css";
+import "../styles/globals.css";
 
 import {
   ApolloClient,
@@ -7,6 +8,7 @@ import {
   ApolloProvider,
 } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
+import { AuthProvider } from "../components/context/auth";
 
 const httpLink = createHttpLink({
   uri: "http://localhost:5000/",
@@ -32,7 +34,9 @@ const client = new ApolloClient({
 function MyApp({ Component, pageProps }) {
   return (
     <ApolloProvider client={client}>
-      <Component {...pageProps} />
+      <AuthProvider>
+        <Component {...pageProps} />
+      </AuthProvider>
     </ApolloProvider>
   );
 }

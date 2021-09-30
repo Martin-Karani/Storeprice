@@ -36,6 +36,9 @@
 .product-container__card .img-wrapper img {
   min-width: 100%;
 }
+.dt-deals {
+  display: none;
+}
 @media screen and (min-width: 900px) {
   .product-container__card .img-wrapper {
     width: 14rem;

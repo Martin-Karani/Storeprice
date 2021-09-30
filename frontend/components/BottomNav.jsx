@@ -2,12 +2,12 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 
-import { ReactComponent as StoreIcon } from "../public/store2.svg";
-import { ReactComponent as CategoryIcon } from "../public/menu.svg";
-import { ReactComponent as OffersIcon } from "../public/price-tag2.svg";
-import { ReactComponent as ProfileIcon } from "../public/user.svg";
-import { ReactComponent as AddIcon } from "../public/add.svg";
-import { ReactComponent as RightArrowIcon } from "../public/right-arrow.svg";
+import StoreIcon from "../public/store2.svg";
+import CategoryIcon from "../public/menu.svg";
+import OffersIcon from "../public/price-tag2.svg";
+import ProfileIcon from "../public/user.svg";
+import AddIcon from "../public/add.svg";
+import RightArrowIcon from "../public/right-arrow.svg";
 
 const categories = [
   "Phones",
@@ -24,7 +24,7 @@ const categories = [
 ];
 function BottomNav() {
   const [prevScrollPos, setPrevScrollPos] = useState({
-    prev: window.pageYOffset,
+    prev: typeof window !== "undefined" && window.pageYOffset,
     visible: true,
   });
 
@@ -47,31 +47,18 @@ function BottomNav() {
           prevScrollPos.visible ? ` bottomNav--hidden bottomNav` : "bottomNav"
         }
       >
-        <Link href="/deals" className="flex-column align-center">
-          <StoreIcon
-            style={{
-              height: "13px",
-              width: "13px",
-              fill: "#ffffff",
-              margin: "auto",
-            }}
-          />
-          <p>Deals</p>
+        <Link href="/deals">
+          <div className="flex-column align-center">
+            <Image src={StoreIcon} height="13px" width="13px" />
+            <p>Deals</p>
+          </div>
         </Link>
 
         <div
           className="flex-column align-center"
           onClick={() => setCategoriesVisible("categories")}
         >
-          <OffersIcon
-            style={{
-              height: "13px",
-              width: "13px",
-              fill: "#ffffff",
-              margin: "auto",
-            }}
-          />
-
+          <Image src={OffersIcon} height="13px" width="13px" />
           <p>Categories</p>
         </div>
 
@@ -79,38 +66,17 @@ function BottomNav() {
           className="add-icon-wrapper"
           onClick={() => setCategoriesVisible("add-price")}
         >
-          <AddIcon
-            style={{
-              height: "13px",
-              width: "13px",
-              fill: "#ffffff",
-              margin: "0",
-            }}
-          />
+          <Image src={AddIcon} height="13px" width="13px" />
         </div>
-        <Link href="/stores" className="flex-column align-center">
-          <div>
-            <CategoryIcon
-              style={{
-                height: "13px",
-                width: "13px",
-                fill: "#ffffff",
-                margin: "auto",
-              }}
-            />
+        <Link href="/stores">
+          <div className="flex-column align-center">
+            <Image src={CategoryIcon} height="13px" width="13px" />
             <p>Stores</p>
           </div>
         </Link>
-        <Link href="/profile" className="flex-column align-center">
-          <div>
-            <ProfileIcon
-              style={{
-                height: "13px",
-                width: "13px",
-                fill: "#ffffff",
-                margin: "auto",
-              }}
-            />
+        <Link href="/profile">
+          <div className="flex-column align-center">
+            <Image src={ProfileIcon} height="13px" width="13px" />
             <p>Profile</p>
           </div>
         </Link>
@@ -142,12 +108,12 @@ function BottomNav() {
                 <li key={category} className="flex-row justify-space-btwn">
                   <div className="flex-row align-center">
                     <div className="img-wrapper sub-categories__nav-img">
-                      <Image src="#" alt="" />
+                      <Image src={"/"} alt="" layout="fill" />
                     </div>
                     <p>{category}</p>
                   </div>
                   <div className="svg-wrapper sub-categories__nav-arrow">
-                    <RightArrowIcon style={{ height: "10px", width: "10px" }} />
+                    <Image src={RightArrowIcon} height="10px" width="10px" />
                   </div>
                 </li>
               ))}

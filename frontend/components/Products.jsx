@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import Link from "next/link";
 import Image from "next/image";
 
-import styles from "./Product.module.css";
+import styles from "../styles/Products.module.css";
 import Samsung from "../public/samsung.jpeg";
 import Empty from "./Empty";
 
@@ -36,18 +36,20 @@ function Products({ products }) {
       {products && products.length > 0 ? (
         products.map((product) => (
           <div className={styles["products__item"]} key={product._id}>
-            <Link to={`/productdetails/${product._id}`}>
-              <figure className="img-wrapper">
-                <Image src={Samsung} alt={product.name + "image"} />
-              </figure>
-              <div className={styles["products__item-details"]}>
-                <h3 className={styles["products__item-name"]}>
-                  {product.name}
-                </h3>
-                <p className={styles["products__item-specs"]}></p>
-                <p className={styles["products__item-price"]}>
-                  KSH {product.lowestPrice}
-                </p>
+            <Link href={`/product/${product.name}`}>
+              <div>
+                <figure className="img-wrapper">
+                  <Image src={Samsung} alt={product.name + "image"} />
+                </figure>
+                <div className={styles["products__item-details"]}>
+                  <h3 className={styles["products__item-name"]}>
+                    {product.name}
+                  </h3>
+                  <p className={styles["products__item-specs"]}></p>
+                  <p className={styles["products__item-price"]}>
+                    KSH {product.lowestPrice}
+                  </p>
+                </div>
               </div>
             </Link>
             <div className={styles["product-tags"]}>

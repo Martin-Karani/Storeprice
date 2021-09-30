@@ -1,10 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
-import  Link  from "next/link";
-import useForm from "./hooks/useForm";
+import Link from "next/link";
 import { useMutation } from "@apollo/client";
-import { AuthContext } from "../context/auth";
-import { CREATE_MEMBER } from "../graphql/Mutations";
+import useForm from "./hooks/useForm";
+import { AuthContext } from "./context/auth";
+import { CREATE_MEMBER } from "./graphql/Mutations";
 import { BackFunction } from "./NavBar";
+import styles from "../styles/Login.module.css";
 
 function SignMember() {
   const [errors, setErrors] = useState([]);
@@ -49,49 +50,63 @@ function SignMember() {
   }
 
   return (
-    <div className="sign-member">
+    <div className={styles["sign-member"]}>
       <div className="back flex-row">
         <BackFunction />
         Back
       </div>
-      <div className="sign-welcome">Welcome to PriceStore</div>
+      <div className={styles["sign-welcome"]}>Welcome to PriceStore</div>
       {createdSuccessfully && (
         <div className="login-success">Created Successfully</div>
       )}
-      <div className={errors.userName ? "login__input error" : "login__input"}>
+      <div
+        className={
+          errors.userName
+            ? styles["login__input"] + styles["error"]
+            : styles["login__input"]
+        }
+      >
         <label>UserName</label>
         {errors.userName && (
-          <span className="input-error">{errors.userName}</span>
+          <span className={styles["input-error"]}>{errors.userName}</span>
         )}
         <input
           type="search"
           name="userName"
           onChange={handleChange}
           value={input.userName}
-          className="login__email"
+          className={styles["login__email"]}
           placeholder="martoh karash"
         />
       </div>
 
-      <div className={errors.email ? "login__input error" : "login__input"}>
+      <div
+        className={
+          errors.email
+            ? styles["login__input"] + styles["error"]
+            : styles["login__input"]
+        }
+      >
         <label>Email</label>
 
-        {errors.email && <span className="input-error">{errors.email}</span>}
+        {errors.email && (
+          <span className={styles["input-error"]}>{errors.email}</span>
+        )}
         <input
           type="search"
           name="email"
           onChange={handleChange}
           value={input.email}
-          className="login__email"
-          placeholder="martih@gmail.com"
+          className={styles["login__email"]}
+          placeholder="name@gmail.com"
         />
       </div>
 
       <div
         className={
           errors.password || errors.confirmPassword
-            ? "login__input error"
-            : "login__input"
+            ? styles["login__input"] + styles["error"]
+            : styles["login__input"]
         }
       >
         <label>Password</label>
@@ -113,13 +128,13 @@ function SignMember() {
       <div
         className={
           errors.password || errors.confirmPassword
-            ? "login__input error"
-            : "login__input"
+            ? styles["login__input"] + styles["error"]
+            : styles["login__input"]
         }
       >
         <label>Confirm Password</label>
         {(errors.password || errors.confirmPassword) && (
-          <span className="input-error">
+          <span className={styles["input-error"]}>
             {errors.password || errors.confirmPassword}
           </span>
         )}
@@ -129,7 +144,7 @@ function SignMember() {
           id=""
           value={input.confirmPassword}
           onChange={handleChange}
-          className="login__password"
+          className={styles["login__password"]}
           placeholder="wekr84-20256"
         />
       </div>
@@ -145,12 +160,12 @@ function SignMember() {
           By Signing in, I agree to Terms Conditions
         </label>
       </div>
-      <button className="login__btn" onClick={handleSubmit}>
+      <button className={styles["login__btn"]} onClick={handleSubmit}>
         Sign Up
       </button>
-      <div className="login__or">or Already have an account</div>
-      <Link to="/login">
-        <button className="login__signUp-btn">Login</button>
+      <div className={styles["login__or"]}>or Already have an account</div>
+      <Link href="/login">
+        <button className={styles["login__signUp-btn"]}>Login</button>
       </Link>
     </div>
   );

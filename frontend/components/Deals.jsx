@@ -4,7 +4,7 @@ import Image from "next/image";
 import { ReactComponent as Favorite } from "../public/heart.svg";
 import NavBar from "./NavBar";
 import Samsung from "../public/samsung.jpeg";
-import styles from "./Deal.module.css";
+import styles from "../styles/Deal.module.css";
 
 function Deals() {
   return (

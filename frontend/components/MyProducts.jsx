@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Image from "next/image";
-import styles from "./MyProducts.module.css";
+import styles from "../styles/MyProducts.module.css";
 
 function MyProducts({ showMyProducts }) {
   const [myProducts, setMyProducts] = useState("recently");

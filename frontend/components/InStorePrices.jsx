@@ -1,16 +1,22 @@
 import React from "react";
 import Link from "next/link";
 
-import { ReactComponent as Phone } from "../public/call.svg";
-import { ReactComponent as Verified } from "../public/verified.svg";
-import { ReactComponent as LocationIcon } from "../public/placeholder.svg";
+import Phone from "../public/call.svg";
+import Verified from "../public/verified.svg";
+import LocationIcon from "../public/placeholder.svg";
 import Empty from "./Empty";
+
+import styles from "../styles/ProductDetails.module.css";
 
 function InStorePrices({ inStorePrices }) {
   return (
     <div className={styles["shop-nearby"]}>
       <h3 className="category-name">Shops Nearby</h3>
-      <div className={"inStore__filterSort" + "flex-row justify-space-btwn"}>
+      <div
+        className={
+          styles["inStore__filterSort  "] + " flex-row justify-space-btwn"
+        }
+      >
         <div className={styles["region-filter"]}>
           <span>Filter</span>
           <select>

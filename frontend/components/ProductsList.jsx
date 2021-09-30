@@ -1,59 +1,63 @@
 import React, { useContext, useState } from "react";
-import Filter from "../components/Filter";
-import Footer from "../components/Footer";
-import Loader from "../components/Loader";
-
-import "../styles/products-page.css";
-
-import NavBar from "../components/NavBar";
-import Space from "../components/Space";
-import Products from "../components/Products";
-import { useHistory } from "react-router-dom";
-import { ScrollToTop } from "../utils";
+import { useRouter } from "next/router";
 import { useQuery } from "@apollo/client";
-import { GET_PRODUCTS } from "../graphql/queries";
-import { AuthContext } from "../context/auth";
-import Filter2 from "../components/Filter2";
-import LargeNavBAr from "../components/LargeNavBAr";
+import { AuthContext } from "./context/auth";
+import { GET_PRODUCTS } from "./graphql/queries";
 
-function ProductsListings() {
+import styles from "../styles/ProductsPage.module.css";
+// import { ScrollToTop } from "../utils";
+
+import Filter from "./Filter";
+import Footer from "./Footer";
+import Loader from "./Loader";
+import NavBar from "./NavBar";
+import Space from "./Space";
+import Products from "./Products";
+import Filter2 from "./Filter2";
+import LargeNavBAr from "./LargeNavBAr";
+
+function ProductsList() {
   const [filter, setFilter] = useState("Brands");
+
   const {
     selectedProducts,
     toggleSelected,
     setToggleSelected,
     setSelectedProducts,
   } = useContext(AuthContext);
+
   const totalSelected = selectedProducts.length;
-  const history = useHistory();
-  ScrollToTop();
+
+  const router = useRouter();
 
   const { loading, error, data } = useQuery(GET_PRODUCTS, {
     onError(err) {
       console.log(err);
     },
+    variables: { category: "Phones" },
   });
 
   // if (loading || !data) return "Loading";
-  if (error) return "Error";
-
+  // if (error) return "Error";
+  //
   return (
     <>
-      {window.innerWidth > 960 ? (
-        <LargeNavBAr />
-      ) : (
-        <NavBar name="MOBILE PHONES" />
-      )}
+      <LargeNavBAr />
+
+      <NavBar name="MOBILE PHONES" />
+
       {loading || !data ? (
         <Loader />
       ) : (
-        <div className="products-page">
+        <div className={styles["products-page"]}>
           <div className=" ">
-            <div className="product-page__categories">
+            <div className={styles["product-page__categories"]}>
               <span
                 onClick={() => setFilter("Brands")}
                 className={
-                  filter === "Brands" ? "main-filter active" : "main-filter"
+                  filter === "Brands"
+                    ? styles["main-filter "] + styles["active"]
+                    : styles["main-filter"]
                 }
               >
                 Brands
@@ -61,46 +65,49 @@ function ProductsListings() {
               <span
                 onClick={() => setFilter("Prices")}
                 className={
-                  filter === "Prices" ? "main-filter active" : "main-filter"
+                  filter === "Prices"
+                    ? styles["main-filter "] + styles["active"]
+                    : styles["main-filter"]
                 }
               >
                 Prices
               </span>
             </div>
             {filter === "Brands" && (
-              <ul className="product-page__sub-categories">
+              <ul className={styles["product-page__sub-categories"]}>
                 {[...Array(5)].map((_, index) => (
                   <li key={index}>Samsung</li>
                 ))}
               </ul>
             )}
             {filter === "Prices" && (
-              <ul className="product-page__sub-categories">
+              <ul className={styles["product-page__sub-categories"]}>
                 <li>
-                  <div className="img-wrapper">
+                  <figure>
                     <img src="#" alt="" />
-                  </div>
+                  </figure>
                   <p>10,000-20,000</p>
                 </li>
                 <li>
-                  <div className="img-wrapper">
+                  <figure>
                     <img src="#" alt="" />
-                  </div>
+                  </figure>
                   <p>20,000 - 35,000</p>
                 </li>
                 <li>
-                  <div className="img-wrapper">
+                  <figure>
                     <img src="#" alt="" />
-                  </div>
+                  </figure>
                   <p>40,000- Above</p>
                 </li>
               </ul>
             )}
             <Space />
           </div>
-          <div className="filter-products">
-            {window.innerWidth > 960 ? <Filter2 /> : <Filter />}
-            <div className="products-container">
+          <div className={styles["filter-products"]}>
+            <Filter2 />
+            <Filter />
+            <div className={styles["products-container"]}>
               <div className="flex-row justify-space-btwn align-center">
                 <h1 className="category-name">366 Products</h1>
                 <ul className="flex-row justify-space-btwn align-center">
@@ -119,16 +126,16 @@ function ProductsListings() {
                 </ul>
               </div>
               {toggleSelected && totalSelected > 0 && (
-                <div className="selected-products">
+                <div className={styles["selected-products"]}>
                   <h4>Selected Products ({totalSelected})</h4>
-                  <ul className="flex-row selected-list">
+                  <ul className={styles["selected-list"]}>
                     {selectedProducts.map((product, index) => (
                       <li key={index}>{product.name}</li>
                     ))}
                   </ul>
                   <div className="flex-row">
                     <button
-                      className="cancel-selected-btn"
+                      className={styles["cancel-selected-btn"]}
                       onClick={() => (
                         setToggleSelected(), setSelectedProducts([])
                       )}
@@ -137,8 +144,8 @@ function ProductsListings() {
                     </button>
 
                     <button
-                      className="compare-btn"
-                      onClick={() => history.push("/compare")}
+                      className={styles["compare-btn"]}
+                      onClick={() => router.push("/compare")}
                     >
                       Compare
                     </button>
@@ -157,4 +164,4 @@ function ProductsListings() {
   );
 }
 
-export default ProductsListings;
+export default ProductsList;
