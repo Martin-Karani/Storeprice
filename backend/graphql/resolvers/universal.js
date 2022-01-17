@@ -1,8 +1,20 @@
 const { UserInputError } = require("apollo-server-errors");
 const { ObjectId } = require("mongodb");
+const fs = require("fs");
+const path = require("path");
 
 const server = require("../../server");
 const isAuth = require("../../utils/isAuth");
+
+const fileRenamer = (filename) => {
+  const queHoraEs = Date.now();
+  const regex = /[\s_-]/gi;
+  const fileTemp = filename.replace(regex, ".");
+  let arrTemp = [fileTemp.split(".")];
+  return `${arrTemp[0]
+    .slice(0, arrTemp[0].length - 1)
+    .join("_")}${queHoraEs}.${arrTemp[0].pop()}`;
+};
 
 module.exports = {
   Query: {
@@ -66,6 +78,19 @@ module.exports = {
     // },
   },
   Mutation: {
+    fileUpload: async (parent, { file }) => {
+      let url = [];
+      for (let i = 0; i < file.length; i++) {
+        const { createReadStream, filename, mimetype } = await file[i];
+        const stream = createReadStream();
+        const assetUniqName = fileRenamer(filename);
+        const pathName = path.join(__dirname, `./upload/${assetUniqName}`);
+        await stream.pipe(fs.createWriteStream(pathName));
+        const urlForArray = `http://localhost:4000/${assetUniqName}`;
+        url.push({ url: urlForArray });
+      }
+      return url;
+    },
     addReview: async (_, { productId, review, rating }, context) => {
       try {
         const member = isAuth(context);

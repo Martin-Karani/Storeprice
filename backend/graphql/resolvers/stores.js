@@ -6,9 +6,18 @@ const { UserInputError } = require("apollo-server");
 const server = require("../../server");
 const { SECRET_KEY } = require("../../config");
 const isAuth = require("../../utils/isAuth");
-const { generateToken } = require("./members");
+
 const { validateStoreInput } = require("../../utils/validators");
 
+function generateToken(id) {
+  return jwt.sign(
+    {
+      _id: id,
+    },
+    SECRET_KEY,
+    { expiresIn: "21 days" }
+  );
+}
 async function findProducts(productIds) {
   try {
     const products = await server
@@ -47,13 +56,13 @@ module.exports = {
         throw err;
       }
     },
-    getStore: async (_, { storeId }) => {
+    getStore: async (_, { storeName }) => {
       try {
         const store = await server
           .getDb()
           .db()
           .collection("stores")
-          .findOne({ _id: ObjectId(storeId) });
+          .findOne({ storeName: storeName });
 
         return {
           ...store,
@@ -110,12 +119,12 @@ module.exports = {
           categories: [],
         };
 
-        const { ops } = await server
+        const inserted = await server
           .getDb()
           .db()
           .collection("stores")
           .insertOne(store);
-
+        // console.log(ops);
         hashedpassword = await bcrypt.hash(memberInput.password, 12);
 
         const member = {
@@ -123,19 +132,24 @@ module.exports = {
           password: hashedpassword,
           userName: memberInput.userName,
           isStore: true,
-          storeId: ops[0]._id,
+          storeId: inserted.insertedId,
         };
 
-        const createdMember = await server
+        const { insertedId } = await server
           .getDb()
           .db()
           .collection("members")
           .insertOne(member);
 
-        const token = generateToken(createdMember.ops[0]._id);
-
+        const token = generateToken(insertedId.toString());
+        const createdMember = await server
+          .getDb()
+          .db()
+          .collection("members")
+          .findOne({ _id: insertedId });
+        console.log(createdMember);
         return {
-          ...createdMember.ops[0],
+          ...createdMember,
           password: null,
           token,
         };

@@ -3,8 +3,10 @@ import RightArrow from "../public/right-arrow.svg";
 import DownArrow from "../public/down-arrow.svg";
 import Tick from "../public/tick.svg";
 import Empty from "./Empty";
+import Image from "next/image";
 
 import styles from "../styles/ProductDetails.module.css";
+import Samsung from "../public/jumia-logo.svg";
 
 const OnlinePriceCard = ({ onlinePrices }) => {
   const [input, setInput] = useState({});
@@ -54,9 +56,9 @@ const OnlinePriceCard = ({ onlinePrices }) => {
               </label>
               <div className={styles["stores__online-card__right"]}>
                 <div className="flex-row align-center">
-                  <div className="img-wrapper">
-                    <Image src="#" alt="" />
-                  </div>
+                  <figure>
+                    <Image src={Samsung} alt="" height="50px" width="50px" />
+                  </figure>
                   <div>
                     <p className={styles["stores__online-name"]}>
                       {onlineSite}

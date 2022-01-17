@@ -34,9 +34,7 @@ const client = new ApolloClient({
 function MyApp({ Component, pageProps }) {
   return (
     <ApolloProvider client={client}>
-      <AuthProvider>
-        <Component {...pageProps} />
-      </AuthProvider>
+      <AuthProvider>{<Component {...pageProps} />}</AuthProvider>
     </ApolloProvider>
   );
 }

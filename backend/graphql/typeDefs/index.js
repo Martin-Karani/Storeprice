@@ -1,6 +1,12 @@
-const { gql } = require("apollo-server");
+const { gql } = require("apollo-server-express");
 
 module.exports = gql`
+  scalar Upload
+  type File {
+    filename: String!
+    mimetype: String!
+    encoding: String!
+  }
   type Member {
     _id: ID!
     email: String!
@@ -192,11 +198,12 @@ module.exports = gql`
     getStores: [Store!]
     getSelectedProducts(productIds: [ID!]!): [Product!]
 
-    getStore(storeId: ID!): Store!
+    getStore(storeName: String!): Store!
     compareProducts(productIds: [ID!]): [Product!]
   }
 
   type Mutation {
+    fileUpload(file: Upload!): File!
     # product mutation
     createProduct(productInput: ProductInput!): String!
     deleteProduct(productId: ID!, category: String!): String!

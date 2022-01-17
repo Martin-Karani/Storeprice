@@ -193,9 +193,9 @@ module.exports = {
       try {
         const { isStore } = isAuth(context);
 
-        if (!isStore) {
-          throw new UserInputError("Authorized only");
-        }
+        // if (!isStore) {
+        //   throw new UserInputError("Authorized only");
+        // }
         onlinePriceInput.updatedAt = new Date().toISOString();
 
         const updatedProduct = await server

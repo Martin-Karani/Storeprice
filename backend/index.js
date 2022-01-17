@@ -1,26 +1,41 @@
 const express = require("express");
 // const graphql = require("graphql");
-const { ApolloServer } = require("apollo-server");
-
+const { ApolloServer } = require("apollo-server-express");
+// import * as path from "path";
+const path = require("path");
+const { graphqlUploadExpress } = require("graphql-upload");
 const typeDefs = require("./graphql/typeDefs/index");
 const resolvers = require("./graphql/resolvers/index");
 const server = require("./server");
 
-const app = express();
+async function startServer() {
+  const apollo = new ApolloServer({
+    typeDefs,
+    resolvers,
+  });
+  context: ({ req }) => ({ req }), await apollo.start();
 
-app.use(express.json());
+  const app = express();
 
-const apollo = new ApolloServer({
-  typeDefs,
-  resolvers,
-  context: ({ req }) => ({ req }),
-});
+  app.use(express.json());
 
-server.initDb((err) => {
-  if (err) {
-    console.log(err);
-    console.log("cannot make the connection");
-  }
-  apollo.listen(5000);
-  console.log("listening to port 5000");
-});
+  // This middleware should be added before calling `applyMiddleware`.
+  app.use(graphqlUploadExpress());
+
+  apollo.applyMiddleware({ app });
+
+  app.use(express.static(path.join(__dirname, "./upload")));
+
+  server.initDb((err) => {
+    if (err) {
+      console.log(err);
+      console.log("cannot make the connection");
+    }
+    app.listen(5000);
+    console.log("listening to port 5000");
+  });
+
+  // console.log(`🚀 Server ready at http://localhost:5000}`);
+}
+
+startServer();

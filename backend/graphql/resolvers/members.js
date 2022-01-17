@@ -18,7 +18,6 @@ function generateToken(id) {
     { expiresIn: "21 days" }
   );
 }
-exports = generateToken;
 
 module.exports = {
   Query: {
